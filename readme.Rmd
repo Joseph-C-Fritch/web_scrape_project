@@ -1,0 +1,29 @@
+---
+output:
+  html_document: default
+---
+
+Blockchain technologies and cryptocurrencies have gained popularity through social media platforms such as Reddit. This application attempts to visualize relationships between Reddit's r/Ripple sub-reddit and XRP price during the time period July 30th, 2018 and February 1, 2019.  The project attemps to answer the following questions:
+
+
+1. Do the number of sub-reddit posts correlate with future price change? 
+
+2. Does sub-reddit post sentiment have any correlation with future price change?
+
+3. What are the most common words posted prior positive price change?
+
+Pearson correlation is used to measure correlation and statistical significance is evaluated.
+
+Data used for this visualization application were scraped using Selenium.  All scraping was performed on "https://www.reddit.com/r/Ripple/" sub-reddit constrained to thread titles "Daily Ripple/XRP Discussion Thread ##/##/#### [Questions and Price Predictions]"
+
+All associated files can and code are found in this file.
+
+
+
+
+
+
+
+
+ 
+
