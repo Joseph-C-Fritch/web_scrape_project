@@ -29,25 +29,24 @@ ui <- fluidPage(
     tabPanel(
       title = 'Main Page',
       fluid = TRUE,
-      fluidRow(column(12,
-                     includeMarkdown("main_page.rmd"))),
+      fluidRow(column(6,
+                     includeMarkdown("main_page.rmd")),
+               column(6,
+                 img(src = './xrp_logo_svg.svg', 
+                     style = 'length:50%; width:50%; border:0px;
+                            display: block; margin-left: auto; margin-right: auto;')
+               )
+               ),
       fluidRow(br(),
-               column(12,
-                      br(),
-                      column(
-                        6,
-                        img(src = './xrp_logo_svg.svg', 
-                            style = 'length:50%; width:50%; border:0px;
-                            display: block; margin-left: auto; margin-right: auto;')
-                      ),
-                      column(
-                        6,
-                        img(src = './reddit.svg', 
-                            style = 'length:50%; width:50%; border:0px;
-                            display: block; margin-left: auto; margin-right: auto;')
-                      )
+               column(6),
+                column(
+                  6,
+                  img(src = './reddit.svg', 
+                      style = 'length:50%; width:50%; border:0px;
+                      display: block; margin-left: auto; margin-right: auto;')
+                )
                       
-                      ))
+                      )
     ),
     #tabPanel(
       #title = 'Definitions',
@@ -59,7 +58,8 @@ ui <- fluidPage(
       tagList(shiny::icon('chart-line'), "Number of Post vs Price Over Time"),
       sidebarLayout(
         sidebarPanel(
-          helpText('Select date range to see number of posts per day and associated closing price.'),
+          helpText('Select date range to view
+                   number of posts per day and associated closing price.'),
           sliderInput("slider1", label = h3("Date Range"), min = min(df10$date), 
                       max = max(df10$date), value = c(min(df10$date), max(df10$date))),
           fluidRow(
@@ -96,9 +96,9 @@ ui <- fluidPage(
             tabPanel("Correlation Matrix", img(src = './Rplot01.png', 
                          style = 'length:50%; width:50%; border:0px;
                        display: block; margin-left: auto; margin-right: auto;')),
-            tabPanel("Corrlation Table (r)", DT::dataTableOutput("table1")),
-            tabPanel("Corrlation Table (p)", DT::dataTableOutput("table2")),
-            tabPanel("Positve Gain Word Cloud", img(src = './wc_day.png', 
+            tabPanel("Correlation Table (r)", DT::dataTableOutput("table1")),
+            tabPanel("Correlation Table (p)", DT::dataTableOutput("table2")),
+            tabPanel("Positive Gain Word Cloud", img(src = './wc_day.png', 
                                        style = 'length:50%; width:50%; border:0px;
                                        display: block; margin-left: auto; margin-right: auto;')),
             tabPanel("Negative Gain Word Cloud", img(src = './wc_day_loss.png', 
@@ -127,9 +127,9 @@ ui <- fluidPage(
                      tabPanel("Correlation Matrix", img(src = './Rplot02.png', 
                                                         style = 'length:50%; width:50%; border:0px;
                                                         display: block; margin-left: auto; margin-right: auto;')),
-                     tabPanel("Corrlation Table (r)", DT::dataTableOutput("table3")),
-                     tabPanel("Corrlation Table (p)", DT::dataTableOutput("table4")),
-                     tabPanel("Positve Gain Word Cloud", img(src = './wc_week.png', 
+                     tabPanel("Correlation Table (r)", DT::dataTableOutput("table3")),
+                     tabPanel("Correlation Table (p)", DT::dataTableOutput("table4")),
+                     tabPanel("Positive Gain Word Cloud", img(src = './wc_week.png', 
                                                 style = 'length:50%; width:50%; border:0px;
                                        display: block; margin-left: auto; margin-right: auto;')),
                      tabPanel("Negative Gain Word Cloud", img(src = './wc_week_loss.png', 

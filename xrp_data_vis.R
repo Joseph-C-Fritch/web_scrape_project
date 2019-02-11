@@ -80,17 +80,20 @@ df21 = df5%>%
   mutate(., prev_count = lag(count))%>%
   select(., percentage_change, prev_count)%>%
   na.omit()
+  
 
 
 #Plot
-ggplot(data = df20, aes(x = prev_count, y = percentage_change))+
+ggplot(data = df21, aes(x = prev_count, y = percentage_change))+
   geom_point() +
   labs(y = "Price Change, (%)",
        x = "Number of Posts, (n)",
        colour = "Legend")+
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(legend.position = c(0.8, 0.9))+
-  ggtitle('Price Change vs Number of Posts')
+  ggtitle('Price Change vs Number of Posts')+
+  geom_smooth(method = "lm")
+  
 #########################################################################
 #Sentiment vs Price Change
 df22 = df5%>%
