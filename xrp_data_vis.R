@@ -128,8 +128,8 @@ ggplot(data = df23, aes(x = prev_polarity, y = percentage_change))+
 
 mydata.rcorr = rcorr(as.matrix(df31))
 rcx = mydata.rcorr
-df.rcx.r=data.frame(rcx$r)
-df.rcx.p=data.frame(rcx$P)
+df.rcx.r=round(data.frame(rcx$r),2)
+df.rcx.p=round(data.frame(rcx$P),2)
 
 write.csv(df.rcx.r,file = 'df.rcx.r2.csv',fileEncoding = 'UTF-8')
 write.csv(df.rcx.p,file = 'df.rcx.p2.csv',fileEncoding = 'UTF-8')

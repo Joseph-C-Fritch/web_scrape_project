@@ -56,10 +56,10 @@ ui <- fluidPage(
                       #withMathJax(includeMarkdown("definitions.Rmd"))))
     #),
     tabPanel(
-      tagList(shiny::icon('chart-line'), "Post vs Price Over Time"),
+      tagList(shiny::icon('chart-line'), "Number of Post vs Price Over Time"),
       sidebarLayout(
         sidebarPanel(
-          helpText('Select date range to see number of posts and closing prices within range.'),
+          helpText('Select date range to see number of posts per day and associated closing price.'),
           sliderInput("slider1", label = h3("Date Range"), min = min(df10$date), 
                       max = max(df10$date), value = c(min(df10$date), max(df10$date))),
           fluidRow(
@@ -79,8 +79,8 @@ ui <- fluidPage(
       tagList(shiny::icon('chart-line'), "Previous Day's Insight"),
       fluidRow(
         column(12,
-               helpText('The following plots and matrix attempt to visualize if a relationship exists
-                between reddit post volumme or post sentiment and the following days price change.')
+               helpText('The following plots and matrix visualize 
+                        Reddit post volume and post sentiment with following day price change.')
                ),
         br(),
         fluidRow(
@@ -110,9 +110,8 @@ ui <- fluidPage(
       tagList(shiny::icon('chart-line'), "Previous Week's Insight"),
       fluidRow(
         column(12,
-               helpText("The following plots and matrix attempt to visualize if a relationship exists
-                between reddit post volumme or post sentiment for the entire week
-                preceding the current week's price change.")
+               helpText("The following plots and matrix visualize the preceding week's Reddit post volume 
+                and post sentiment with the current week's price change.")
                ),
         br(),
         fluidRow(
@@ -179,30 +178,7 @@ server <- function(input, output, session) {
     df10%>%
       filter(., between(date, input$slider2[1], input$slider2[2]))
   })
-  #output$wordcloud2 <- renderWordcloud2({
-  #  docs <- Corpus(VectorSource(df13()$text)) 
-  #  tdm <- TermDocumentMatrix(docs)
-  #  m <- as.matrix(tdm)
-  #  v <- sort(rowSums(m),decreasing=TRUE)
-  #  d <- data.frame(word = names(v),freq=v)
-  #  set.seed(1234)
-  #  wordcloud2(data = d[0:400, ], size = 30, backgroundColor = 'black',color = 'white',
-  #             figPath = "./www/xrp_logo.jpg")
-  #})
-  
- # output$plot2 <- renderPlot({
-#    ggplot(df13(), aes(x = df13()$date)) +
-#      geom_line(aes(y = df13()$count, colour = "posts")) +
-#      geom_line(aes(y = df13()$price*800, colour = "price")) +
-#      scale_y_continuous(sec.axis = sec_axis(~./800, name = "Price, ($)")) +
-#      scale_colour_manual(values = c("blue", "red")) +
-#      labs(y = "Number of Posts, (n)",
-#           x = "Date",
-#           colour = "Legend")+
-#      theme(plot.title = element_text(hjust = 0.5)) +
-#      theme(legend.position = c(0.8, 0.9))+
-#      ggtitle('Number of Posts & Price Over Time')
- # })
+
   #################################################################################### 
   output$table1 = DT::renderDataTable({
     df.rcx.r1

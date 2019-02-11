@@ -1,0 +1,13 @@
+name: Scraping_Project
+title: Scraping_Project
+username:
+account: joseph-c-fritch
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 705897
+bundleId: 1867893
+url: https://joseph-c-fritch.shinyapps.io/Scraping_Project/
+when: 1549846042.07668
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|chromedriver.exe|combined.csv|combined_.csv|content.csv|content_clean.csv|content_clean_final.csv|corr_dly.png|df42.csv|df45.csv|df48.csv|df51.csv|df7.csv|links.csv|posts.csv|R_Test_File.R|readme.Rmd|reddit_content_scrape_v1.py|reddit_link_scrape.py|subs.csv|test_1.xlsx|xrp_data_vis.R|xrp_price.csv|xrp_price_final.csv|XRP_Reddit_PreProcess_1.ipynb|XRP_Reddit_PreProcess_2.ipynb|.ipynb_checkpoints/XRP_Reddit_PreProcess_1-checkpoint.ipynb|.ipynb_checkpoints/XRP_Reddit_PreProcess_2-checkpoint.ipynb
