@@ -1,0 +1,6 @@
+"","count","percentage_change","prev_count","first_diff_count","first_diff_pc"
+"count",NA,0,0,0,0.49
+"percentage_change",0,NA,0.58,0.45,0
+"prev_count",0,0.58,NA,0,0.09
+"first_diff_count",0,0.45,0,NA,0.17
+"first_diff_pc",0.49,0,0.09,0.17,NA

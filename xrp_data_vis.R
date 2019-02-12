@@ -81,10 +81,39 @@ df21 = df5%>%
   select(., percentage_change, prev_count)%>%
   na.omit()
   
+#Day Prior
+df65 = df5%>%
+  rename(., day = date)%>%
+  group_by(., day)%>%
+  summarise(.,count=n(), percentage_change = mean(((close-open)/open)*100))%>%
+  mutate(., prev_count = lag(count))%>%
+  mutate(., first_diff_count = prev_count - lag(prev_count))%>%
+  mutate(., first_diff_pc = percentage_change - lag(percentage_change))%>%
+  na.omit()
+
+#Day Prior
+df66 = df5%>%
+  group_by(., week)%>%
+  summarise(.,count=n(), percentage_change = mean(weekly_price_change))%>%
+  mutate(., prev_count = lag(count))%>%
+  mutate(., first_diff_count = prev_count - lag(prev_count))%>%
+  mutate(., first_diff_pc = percentage_change - lag(percentage_change))%>%
+  na.omit()
+
+#Plot
+ggplot(data = df21, aes(x = (first_diff_count), y = first_diff_pc))+
+  geom_point() +
+  labs(y = "Price Change, (%)",
+       x = "Number of Posts, (n)",
+       colour = "Legend")+
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(legend.position = c(0.8, 0.9))+
+  ggtitle('Price Change vs Number of Posts')+
+  geom_smooth(method = "lm")
 
 
 #Plot
-ggplot(data = df21, aes(x = prev_count, y = percentage_change))+
+ggplot(data = df66, aes(x = (first_diff_count), y = first_diff_pc))+
   geom_point() +
   labs(y = "Price Change, (%)",
        x = "Number of Posts, (n)",
@@ -112,6 +141,40 @@ df23 = df5%>%
   select(., percentage_change, prev_polarity)%>%
   na.omit()
 
+#Day Prior
+df70 = df5%>%
+  rename(., day = date)%>%
+  group_by(., day)%>%
+  summarise(.,polarity = mean(polarity), percentage_change = mean(((close-open)/open)*100))%>%
+  mutate(., prev_polarity = lag(polarity))%>%
+  mutate(., first_diff_polarity = prev_polarity - lag(prev_polarity))%>%
+  mutate(., first_diff_pc = percentage_change - lag(percentage_change))%>%
+  na.omit()
+
+#Day Prior
+df71 = df5%>%
+  group_by(., week)%>%
+  summarise(.,polarity = mean(polarity), percentage_change = mean(weekly_price_change))%>%
+  mutate(., prev_polarity = lag(polarity))%>%
+  mutate(., first_diff_polarity = prev_polarity - lag(prev_polarity))%>%
+  mutate(., first_diff_pc = percentage_change - lag(percentage_change))%>%
+  na.omit()
+
+#Plot
+ggplot(data = df71, aes(x = first_diff_polarity, y = first_diff_pc))+
+  geom_point() +
+  labs(y = "Price Change, (%)",
+       x = "Average Post Sentiment Polarity",
+       colour = "Legend")+
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(legend.position = c(0.8, 0.9))+
+  ggtitle('Price Change vs Average Post Sentiment')+
+  geom_smooth(method = "lm")
+#########################################################################
+
+
+
+
 #Plot
 ggplot(data = df23, aes(x = prev_polarity, y = percentage_change))+
   geom_point() +
@@ -125,22 +188,25 @@ ggplot(data = df23, aes(x = prev_polarity, y = percentage_change))+
 
 
 
-
+df83 = dplyr::select(df70, -day)
 
 #mydata.cor = cor(df8, method = c("spearman"))
 
-mydata.rcorr = rcorr(as.matrix(df31))
+mydata.rcorr = rcorr(as.matrix(df81))
 rcx = mydata.rcorr
 df.rcx.r=round(data.frame(rcx$r),2)
 df.rcx.p=round(data.frame(rcx$P),2)
 
-write.csv(df.rcx.r,file = 'df.rcx.r2.csv',fileEncoding = 'UTF-8')
-write.csv(df.rcx.p,file = 'df.rcx.p2.csv',fileEncoding = 'UTF-8')
+write.csv(df.rcx.r,file = 'df.rcx.r83.csv',fileEncoding = 'UTF-8')
+write.csv(df.rcx.p,file = 'df.rcx.p83.csv',fileEncoding = 'UTF-8')
 
 
-mydata.cor = cor(df31, method = c("pearson"))
+mydata.cor = cor(df83, method = c("pearson"))
 
 corrplot(mydata.cor)
+
+
+
 
 mydata.rcorr = rcorr(as.matrix(df30))
 
